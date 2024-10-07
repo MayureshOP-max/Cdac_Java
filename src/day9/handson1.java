@@ -2,7 +2,10 @@ package day9;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class handson1 {
@@ -62,6 +65,27 @@ public class handson1 {
             }
         }
 
+        // Define the time zones for Mumbai and New York
+        ZoneId mumbaiZone = ZoneId.of("Asia/Kolkata");  // Mumbai Time Zone (IST)
+        ZoneId newYorkZone = ZoneId.of("America/New_York");  // New York Time Zone (EDT)
+
+        // Define departure and arrival times (LocalDateTime, without time zone)
+        LocalDateTime departureTime = LocalDateTime.of(2024, 10, 7, 2, 5);  // 2:05 AM on 7th Oct 2024
+        LocalDateTime arrivalTime = LocalDateTime.of(2024, 10, 7, 16, 40);  // 4:40 PM on 7th Oct 2024
+
+        // Create ZonedDateTime objects with the respective time zones
+        ZonedDateTime departureInMumbai = ZonedDateTime.of(departureTime, mumbaiZone);
+        ZonedDateTime arrivalInNewYork = ZonedDateTime.of(arrivalTime, newYorkZone);
+
+        // Calculate the flight duration
+        Duration flightDuration = Duration.between(departureInMumbai, arrivalInNewYork);
+
+        // Get the total hours and minutes of the duration
+        long hours = flightDuration.toHours();
+        long minutes = flightDuration.toMinutes() % 60;
+
+        // Print the flight duration
+        System.out.println("Flight duration is: " + hours + " hours and " + minutes + " minutes.");
         
 
 
